@@ -1,0 +1,42 @@
+<f:layout name="Default" />
+<f:section name="Main">
+    <f:if condition="{hasAccess}">
+        <f:if condition="{images}">
+        <div class="photoswipe-gallery row row-cols-2 row-cols-md-{colsMd} row-cols-lg-{colsLg} g-3" id="pswp-gallery-{contentUid}"
+             data-content-uid="{contentUid}" data-max="{maxSelectable}"
+             data-state="{markedRefUids -> f:format.json()}"
+             data-initial-zoom-level="{initialZoomLevel}"
+             data-secondary-zoom-level="{secondaryZoomLevel}"
+             data-max-zoom-level="{maxZoomLevel}"
+             data-mouse-move-pan="{mouseMovePan}"
+             data-show-hide-animation-type="{showHideAnimationType}"
+             data-bg-opacity="{bgOpacity}">
+            <f:for each="{images}" as="image">
+                <div class="col">
+                    <a href="index.php?photoswipe_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}"
+                       data-pswp-width="{image.width}"
+                       data-pswp-height="{image.height}"
+                       data-pswp-title="{image.title}"
+                       data-refuid="{image.refUid}"
+                       class="d-block position-relative border rounded overflow-hidden">
+                        <img src="index.php?photoswipe_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}" alt="{image.title}" class="img-fluid w-100" loading="lazy" />
+                        <f:if condition="{hasAccess}">
+                            <button type="button"
+                                    class="btn btn-sm btn-primary position-absolute top-0 end-0 m-2 js-pswp-mark"
+                                    title="Bild markieren"
+                                    data-refuid="{image.refUid}">
+                                <span class="js-pswp-mark-icon"></span>
+                            </button>
+                        </f:if>
+                    </a>
+                </div>
+            </f:for>
+        </div>
+
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+        <f:asset.css identifier="photoswipe-css" href="EXT:photoswipe/Resources/Public/Css/photoswipe.css" />
+        <f:asset.script identifier="photoswipe-init" type="module" src="EXT:photoswipe/Resources/Public/Js/photoswipe.js" />
+        </f:if>
+    </f:if>
+</f:section>

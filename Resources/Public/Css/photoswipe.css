@@ -1,0 +1,31 @@
+.photoswipe-gallery .js-pswp-mark {
+  --bs-btn-padding-y: .15rem;
+  --bs-btn-padding-x: .35rem;
+  --bs-btn-font-size: .85rem;
+  line-height: 1;
+}
+
+/* Links in gallery tiles should not be underlined */
+.photoswipe-gallery a { text-decoration: none; }
+
+/* Grid view icons use inline SVG with white outline/filled; control size here */
+.photoswipe-gallery .js-pswp-mark .js-pswp-mark-icon svg { width: 1.1rem; height: 1.1rem; display: block; }
+
+.photoswipe-gallery img {
+  display: block;
+}
+
+/* Lightbox (PhotoSwipe) mark button: color only the icon, keep neutral button */
+.pswp__button--markButton {
+  background: transparent;
+  border: none; /* remove border in lightbox version */
+  border-radius: .375rem; /* similar to Bootstrap btn radius */
+  padding: .125rem .375rem; /* compact, icon-focused */
+}
+
+.pswp__button--markButton:hover { }
+.pswp__button--markButton:focus { outline: none; }
+.pswp__button--markButton:focus-visible { box-shadow: 0 0 0 .2rem rgba(255,255,255,.35); }
+
+/* Lightbox icon is SVG inside span; size it up */
+.pswp__button--markButton .pswp__icn-star .pswp-icn-svg { width: 1.6875rem; height: 1.6875rem; display: block; }

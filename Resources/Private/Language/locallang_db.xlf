@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" product-name="photoswipe">
+    <header/>
+    <body>
+      <trans-unit id="plugin.title"><source>PhotoSwipe Gallery</source></trans-unit>
+      <trans-unit id="flexform.sheet.general"><source>General</source></trans-unit>
+      <trans-unit id="flexform.images"><source>Images</source></trans-unit>
+      <trans-unit id="flexform.allowedUser"><source>Restrict to FE user (optional)</source></trans-unit>
+      <trans-unit id="flexform.allowedUser.none"><source>No restriction</source></trans-unit>
+      <trans-unit id="flexform.maxSelectable"><source>Max selectable images (0 = unlimited)</source></trans-unit>
+      <trans-unit id="flexform.initialZoomLevel"><source>Initial zoom level</source></trans-unit>
+      <trans-unit id="flexform.initialZoomLevel.description"><source>Defines the initial zoom level of the image when the lightbox opens. 1 = fit to viewport (default PhotoSwipe behavior is dynamic). See PhotoSwipe docs.</source></trans-unit>
+      <trans-unit id="flexform.secondaryZoomLevel"><source>Secondary zoom level</source></trans-unit>
+      <trans-unit id="flexform.secondaryZoomLevel.description"><source>Zoom level to apply when user double-taps or uses the secondary zoom gesture.</source></trans-unit>
+      <trans-unit id="flexform.maxZoomLevel"><source>Maximum zoom level</source></trans-unit>
+      <trans-unit id="flexform.maxZoomLevel.description"><source>Maximum allowed zoom level. Prevents zooming in too far.</source></trans-unit>
+      <trans-unit id="flexform.mouseMovePan"><source>Pan image on mouse move</source></trans-unit>
+      <trans-unit id="flexform.mouseMovePan.description"><source>Whether moving the mouse should pan the image when zoomed-in.</source></trans-unit>
+      <trans-unit id="flexform.showHideAnimationType"><source>Show/Hide animation</source></trans-unit>
+      <trans-unit id="flexform.showHideAnimationType.description"><source>Animation used when opening/closing the lightbox. Options: zoom, fade, none.</source></trans-unit>
+      <trans-unit id="flexform.bgOpacity"><source>Background opacity</source></trans-unit>
+      <trans-unit id="flexform.bgOpacity.description"><source>Opacity of the lightbox backdrop. 0 = transparent, 1 = opaque.</source></trans-unit>
+      <trans-unit id="flexform.colsMd"><source>Columns on medium screens (md)</source></trans-unit>
+      <trans-unit id="flexform.colsLg"><source>Columns on large screens (lg)</source></trans-unit>
+      <trans-unit id="fe_users.tx_photoswipe_marks"><source>PhotoSwipe Marks (JSON)</source></trans-unit>
+      <trans-unit id="tab.photoswipe"><source>PhotoSwipe</source></trans-unit>
+      <trans-unit id="tt_content.tx_photoswipe_watermark"><source>Watermark image (optional)</source></trans-unit>
+      <trans-unit id="tt_content.tx_photoswipe_watermark.description"><source>If set, the selected image will be composited as a watermark onto all delivered gallery images at runtime. Use a PNG with transparency for best results.</source></trans-unit>
+    </body>
+  </file>
+  </xliff>

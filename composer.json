@@ -1,0 +1,25 @@
+{
+  "name": "diw/photoswipe",
+  "type": "typo3-cms-extension",
+  "description": "PhotoSwipe gallery plugin for TYPO3 with per-user marking capability",
+  "license": "GPL-2.0-or-later",
+  "state": "stable",
+  "version": "1.0.0",
+  "require": {
+    "php": ">=8.1",
+    "typo3/cms-core": "^12.4 || ^13.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Diw\\Photoswipe\\": "Classes/"
+    }
+  },
+  "suggest": {
+    "bk2k/bootstrap-package": "Our default templates and css depend on bootstrap"
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "photoswipe"
+    }
+  }
+}

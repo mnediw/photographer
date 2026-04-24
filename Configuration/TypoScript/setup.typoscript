@@ -1,0 +1,13 @@
+tt_content.photoswipe =< lib.contentElement
+tt_content.photoswipe {
+  templateName = Photoswipe
+  templateRootPaths.10 = EXT:photoswipe/Resources/Private/Templates/Content/
+  partialRootPaths.10 = EXT:photoswipe/Resources/Private/Partials/
+  layoutRootPaths.10 = EXT:photoswipe/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Diw\Photoswipe\DataProcessing\PhotoswipeProcessor
+  }
+}
+
+# Note: CSS/JS are enqueued from the Fluid template via <f:asset.*>.
