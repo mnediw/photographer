@@ -1,7 +1,7 @@
 {
-  "name": "diw/photoswipe",
+  "name": "diw/photographer",
   "type": "typo3-cms-extension",
-  "description": "PhotoSwipe gallery plugin for TYPO3 with per-user marking capability",
+  "description": "Photographer toolbox with PhotoSwipe gallery (per-user photo marking capability)",
   "license": "GPL-2.0-or-later",
   "state": "stable",
   "require": {
@@ -10,7 +10,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Diw\\Photoswipe\\": "Classes/"
+      "Diw\\Photographer\\": "Classes/"
     }
   },
   "suggest": {
@@ -18,7 +18,7 @@
   },
   "extra": {
     "typo3/cms": {
-      "extension-key": "photoswipe"
+      "extension-key": "photographer"
     }
   }
 }

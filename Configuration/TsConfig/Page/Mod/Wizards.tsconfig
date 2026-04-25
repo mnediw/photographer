@@ -1,11 +1,11 @@
 mod.wizards.newContentElement.wizardItems.media {
   elements {
-    photoswipe {
-      iconIdentifier = content-photoswipe
-      title = LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:plugin.title
+    photographer {
+      iconIdentifier = content-photographer
+      title = LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:plugin.title
       description = PhotoSwipe Galerie (with user selection of images)
-      tt_content_defValues.CType = photoswipe
+      tt_content_defValues.CType = photographer
     }
   }
-  show := addToList(photoswipe)
+  show := addToList(photographer)
 }

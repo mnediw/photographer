@@ -4,14 +4,14 @@ defined('TYPO3') || die();
 
 // Register PageTS for new content element wizard
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-    'photoswipe',
+    'photographer',
     'Configuration/TsConfig/Page/Mod/Wizards.tsconfig',
-    'Photoswipe Wizard'
+    'Photographer Wizard'
 );
 
 // Add static TypoScript
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-    'photoswipe',
+    'photographer',
     'Configuration/TypoScript',
-    'Photoswipe: Setup'
+    'Photographer: Setup'
 );

@@ -13,13 +13,13 @@
              data-bg-opacity="{bgOpacity}">
             <f:for each="{images}" as="image">
                 <div class="col">
-                    <a href="index.php?photoswipe_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}"
+                    <a href="index.php?photographer_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}"
                        data-pswp-width="{image.width}"
                        data-pswp-height="{image.height}"
                        data-pswp-title="{image.title}"
                        data-refuid="{image.refUid}"
                        class="d-block position-relative border rounded overflow-hidden">
-                        <img src="index.php?photoswipe_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}" alt="{image.title}" class="img-fluid w-100" loading="lazy" />
+                        <img src="index.php?photographer_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}" alt="{image.title}" class="img-fluid w-100" loading="lazy" />
                         <f:if condition="{hasAccess}">
                             <button type="button"
                                     class="btn btn-sm btn-primary position-absolute top-0 end-0 m-2 js-pswp-mark"
@@ -35,8 +35,8 @@
 
         <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
-        <f:asset.css identifier="photoswipe-css" href="EXT:photoswipe/Resources/Public/Css/photoswipe.css" />
-        <f:asset.script identifier="photoswipe-init" type="module" src="EXT:photoswipe/Resources/Public/Js/photoswipe.js" />
+        <f:asset.css identifier="photographer-css" href="EXT:photographer/Resources/Public/Css/photographer.css" />
+        <f:asset.script identifier="photographer-init" type="module" src="EXT:photographer/Resources/Public/Js/photographer.js" />
         </f:if>
     </f:if>
 </f:section>

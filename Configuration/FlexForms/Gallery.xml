@@ -4,20 +4,20 @@
     <sDEF>
       <ROOT>
         <TCEforms>
-          <sheetTitle>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.sheet.general</sheetTitle>
+          <sheetTitle>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.sheet.general</sheetTitle>
         </TCEforms>
         <type>array</type>
         <el>
           <allowedUser>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.allowedUser</label>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.allowedUser</label>
               <config>
                 <type>select</type>
                 <renderType>selectSingle</renderType>
                 <foreign_table>fe_users</foreign_table>
                 <items>
                   <numIndex index="0">
-                    <numIndex index="0">LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.allowedUser.none</numIndex>
+                    <numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.allowedUser.none</numIndex>
                     <numIndex index="1">0</numIndex>
                   </numIndex>
                 </items>
@@ -29,7 +29,7 @@
 
           <maxSelectable>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.maxSelectable</label>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxSelectable</label>
               <displayCond>FIELD:allowedUser:REQ:true</displayCond>
               <config>
                 <type>input</type>
@@ -42,8 +42,8 @@
           <!-- PhotoSwipe options (v5) moved from JSON to explicit fields -->
           <initialZoomLevel>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.initialZoomLevel</label>
-              <description>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.initialZoomLevel.description</description>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.initialZoomLevel</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.initialZoomLevel.description</description>
               <config>
                 <type>input</type>
                 <eval>double2</eval>
@@ -54,8 +54,8 @@
 
           <secondaryZoomLevel>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.secondaryZoomLevel</label>
-              <description>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.secondaryZoomLevel.description</description>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.secondaryZoomLevel</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.secondaryZoomLevel.description</description>
               <config>
                 <type>input</type>
                 <eval>double2</eval>
@@ -66,8 +66,8 @@
 
           <maxZoomLevel>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.maxZoomLevel</label>
-              <description>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.maxZoomLevel.description</description>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxZoomLevel</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxZoomLevel.description</description>
               <config>
                 <type>input</type>
                 <eval>double2</eval>
@@ -78,8 +78,8 @@
 
           <mouseMovePan>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.mouseMovePan</label>
-              <description>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.mouseMovePan.description</description>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.mouseMovePan</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.mouseMovePan.description</description>
               <config>
                 <type>check</type>
                 <default>1</default>
@@ -89,8 +89,8 @@
 
           <showHideAnimationType>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.showHideAnimationType</label>
-              <description>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.showHideAnimationType.description</description>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.showHideAnimationType</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.showHideAnimationType.description</description>
               <config>
                 <type>select</type>
                 <renderType>selectSingle</renderType>
@@ -106,8 +106,8 @@
 
           <bgOpacity>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.bgOpacity</label>
-              <description>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.bgOpacity.description</description>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.bgOpacity</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.bgOpacity.description</description>
               <config>
                 <type>input</type>
                 <eval>double2</eval>
@@ -118,7 +118,7 @@
 
           <colsMd>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.colsMd</label>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.colsMd</label>
               <config>
                 <type>select</type>
                 <renderType>selectSingle</renderType>
@@ -137,7 +137,7 @@
 
           <colsLg>
             <TCEforms>
-              <label>LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:flexform.colsLg</label>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.colsLg</label>
               <config>
                 <type>select</type>
                 <renderType>selectSingle</renderType>

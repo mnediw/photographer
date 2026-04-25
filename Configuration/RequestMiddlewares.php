@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'frontend' => [
-        'diw/photoswipe/file' => [
-            'target' => \Diw\Photoswipe\Middleware\PhotoswipeFileMiddleware::class,
+        'diw/photographer/file' => [
+            'target' => \Diw\Photographer\Middleware\PhotographerFileMiddleware::class,
             'after' => [
                 'typo3/cms-frontend/authentication',
             ],
@@ -13,8 +13,8 @@ return [
                 'typo3/cms-frontend/tsfe',
             ],
         ],
-        'diw/photoswipe/mark' => [
-            'target' => \Diw\Photoswipe\Middleware\PhotoswipeMarkMiddleware::class,
+        'diw/photographer/mark' => [
+            'target' => \Diw\Photographer\Middleware\PhotographerMarkMiddleware::class,
             // Ensure FE authentication already ran so we can read user context
             'after' => [
                 'typo3/cms-frontend/authentication',

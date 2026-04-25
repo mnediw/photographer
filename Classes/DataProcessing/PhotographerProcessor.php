@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Diw\Photoswipe\DataProcessing;
+namespace Diw\Photographer\DataProcessing;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -11,11 +11,10 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
-class PhotoswipeProcessor implements DataProcessorInterface, LoggerAwareInterface
+class PhotographerProcessor implements DataProcessorInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
@@ -67,7 +66,7 @@ class PhotoswipeProcessor implements DataProcessorInterface, LoggerAwareInterfac
                 }
             }
         } catch (\Throwable $e) {
-            $this->logger?->error('PhotoswipeProcessor sys_file_reference error', ['error' => $e->getMessage()]);
+            $this->logger?->error('PhotographerProcessor sys_file_reference error', ['error' => $e->getMessage()]);
         }
 
         // FlexForm values (robust parsing)
@@ -209,8 +208,8 @@ class PhotoswipeProcessor implements DataProcessorInterface, LoggerAwareInterfac
         if ($feUserUid > 0 && $hasAccess) {
             try {
                 $feConn = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('fe_users');
-                $row = $feConn->select(['tx_photoswipe_marks'], 'fe_users', ['uid' => $feUserUid])->fetchAssociative();
-                $json = (string)($row['tx_photoswipe_marks'] ?? '');
+                $row = $feConn->select(['tx_photographer_marks'], 'fe_users', ['uid' => $feUserUid])->fetchAssociative();
+                $json = (string)($row['tx_photographer_marks'] ?? '');
                 if ($json !== '') {
                     $dataMarks = json_decode($json, true);
                     if (is_array($dataMarks)) {

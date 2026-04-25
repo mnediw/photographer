@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Diw\Photoswipe\Middleware;
+namespace Diw\Photographer\Middleware;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -16,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Core\Core\Environment;
 
-class PhotoswipeFileMiddleware implements MiddlewareInterface
+class PhotographerFileMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private readonly ResponseFactoryInterface $responseFactory
@@ -26,7 +26,7 @@ class PhotoswipeFileMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
-        if (!isset($queryParams['photoswipe_file'])) {
+        if (!isset($queryParams['photographer_file'])) {
             return $handler->handle($request);
         }
 
@@ -42,7 +42,7 @@ class PhotoswipeFileMiddleware implements MiddlewareInterface
         // Fetch content element
         $ttConn = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tt_content');
         $row = $ttConn->select(['uid', 'CType', 'pi_flexform'], 'tt_content', ['uid' => $contentUid, 'deleted' => 0])->fetchAssociative();
-        if (!$row || ($row['CType'] ?? '') !== 'photoswipe') {
+        if (!$row || ($row['CType'] ?? '') !== 'photographer') {
             return $this->json($response, 404, ['success' => false, 'error' => 'content_not_found']);
         }
 
@@ -55,7 +55,7 @@ class PhotoswipeFileMiddleware implements MiddlewareInterface
         $wmConn = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_file_reference');
         $wmRow = $wmConn->select(['uid', 'uid_local'], 'sys_file_reference', [
             'tablenames' => 'tt_content',
-            'fieldname' => 'tx_photoswipe_watermark',
+            'fieldname' => 'tx_photographer_watermark',
             'uid_foreign' => $contentUid,
             'deleted' => 0,
             'hidden' => 0,
@@ -170,7 +170,7 @@ class PhotoswipeFileMiddleware implements MiddlewareInterface
 
             return $response->withStatus(200);
         } catch (\Throwable $e) {
-            error_log('[photoswipe_file] ' . $e->getMessage());
+            error_log('[photographer_file] ' . $e->getMessage());
             return $this->json($response, 500, ['success' => false, 'error' => 'exception']);
         }
     }
@@ -229,7 +229,7 @@ class PhotoswipeFileMiddleware implements MiddlewareInterface
         // Cache file path based on source+watermark mtimes and names
         $hash = sha1($srcPath . '|' . $srcMTime . '|' . $wmPath . '|' . $wmMTime);
         $ext = $this->preferedExtensionForMime($srcMime);
-        $cacheDir = Environment::getPublicPath() . '/typo3temp/assets/photoswipe';
+        $cacheDir = Environment::getPublicPath() . '/typo3temp/assets/photographer';
         try { GeneralUtility::mkdir_deep($cacheDir); } catch (\Throwable) {}
         $cacheFile = $cacheDir . '/wm_' . $hash . '.' . $ext;
 

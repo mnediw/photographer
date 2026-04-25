@@ -1,12 +1,12 @@
-tt_content.photoswipe =< lib.contentElement
-tt_content.photoswipe {
-  templateName = Photoswipe
-  templateRootPaths.10 = EXT:photoswipe/Resources/Private/Templates/Content/
-  partialRootPaths.10 = EXT:photoswipe/Resources/Private/Partials/
-  layoutRootPaths.10 = EXT:photoswipe/Resources/Private/Layouts/
+tt_content.photographer =< lib.contentElement
+tt_content.photographer {
+  templateName = Photographer
+  templateRootPaths.10 = EXT:photographer/Resources/Private/Templates/Content/
+  partialRootPaths.10 = EXT:photographer/Resources/Private/Partials/
+  layoutRootPaths.10 = EXT:photosgrapher/Resources/Private/Layouts/
 
   dataProcessing {
-    10 = Diw\Photoswipe\DataProcessing\PhotoswipeProcessor
+    10 = Diw\Photographer\DataProcessing\PhotographerProcessor
   }
 }
 

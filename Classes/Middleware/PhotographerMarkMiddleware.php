@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Diw\Photoswipe\Middleware;
+namespace Diw\Photographer\Middleware;
 
 use Doctrine\DBAL\Connection;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
-class PhotoswipeMarkMiddleware implements MiddlewareInterface
+class PhotographerMarkMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private readonly ResponseFactoryInterface $responseFactory
@@ -25,7 +25,7 @@ class PhotoswipeMarkMiddleware implements MiddlewareInterface
     {
         // Only handle requests that explicitly opt-in via query parameter
         $queryParams = $request->getQueryParams();
-        if (!isset($queryParams['photoswipe_mark'])) {
+        if (!isset($queryParams['photographer_mark'])) {
             return $handler->handle($request);
         }
 
@@ -60,7 +60,7 @@ class PhotoswipeMarkMiddleware implements MiddlewareInterface
                 return $response->withStatus(404);
             }
 
-            if (($row['CType'] ?? '') !== 'photoswipe') {
+            if (($row['CType'] ?? '') !== 'photographer') {
                 $response->getBody()->write(json_encode(['success' => false, 'error' => 'invalid_content_type']));
                 return $response->withStatus(400);
             }
@@ -80,8 +80,8 @@ class PhotoswipeMarkMiddleware implements MiddlewareInterface
 
             // Load and update marks
             $feConn = $this->connection('fe_users');
-            $feRow = $feConn->select(['tx_photoswipe_marks'], 'fe_users', ['uid' => $feUserUid])->fetchAssociative();
-            $json = (string)($feRow['tx_photoswipe_marks'] ?? '');
+            $feRow = $feConn->select(['tx_photographer_marks'], 'fe_users', ['uid' => $feUserUid])->fetchAssociative();
+            $json = (string)($feRow['tx_photographer_marks'] ?? '');
             $data = $json !== '' ? json_decode($json, true) : [];
             if (!is_array($data)) {
                 $data = [];
@@ -120,13 +120,13 @@ class PhotoswipeMarkMiddleware implements MiddlewareInterface
 
             if ($changed) {
                 $data[$key] = array_values(array_unique(array_map('intval', $current)));
-                $feConn->update('fe_users', ['tx_photoswipe_marks' => json_encode($data, JSON_UNESCAPED_SLASHES)], ['uid' => $feUserUid]);
+                $feConn->update('fe_users', ['tx_photographer_marks' => json_encode($data, JSON_UNESCAPED_SLASHES)], ['uid' => $feUserUid]);
             }
 
             $response->getBody()->write(json_encode(['success' => true, 'marked' => $current]));
             return $response->withStatus(200);
         } catch (\Throwable $e) {
-            error_log('[photoswipe_mw] exception: ' . $e->getMessage());
+            error_log('[photographer_mw] exception: ' . $e->getMessage());
             $response->getBody()->write(json_encode(['success' => false, 'error' => 'exception']));
             return $response->withStatus(200);
         }

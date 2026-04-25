@@ -1,4 +1,4 @@
-### DIW PhotoSwipe for TYPO3 (v12–v13)
+### DIW Photographerfor TYPO3 (v12–v13)
 
 PhotoSwipe gallery content element for TYPO3 that lets a specific frontend user mark/select images - especially helpful for photographers to let their customers mark the photos they want to purchase. Adds a lightbox with PhotoSwipe v5. Images can be served from public or private FAL storages; for private storages the extension ships a PSR-15 middleware that delivers files with access control.
 
@@ -12,6 +12,10 @@ PhotoSwipe gallery content element for TYPO3 that lets a specific frontend user 
 - PhotoSwipe v5 lightbox with an integrated Mark button
 - Bootstrap-ready grid; configurable columns for md/lg
 - Optional on-the-fly watermarking via secure middleware (works with public or private storages)
+
+#### Future Features
+- Support for collecting marked files for download in ZIP archive
+- Support for online payment
 
 ---
 
@@ -30,11 +34,11 @@ bk2k/bootstrap-package: Our default templates and css depend on bootstrap
 ### Installation
 1) Install via Composer
      ```bash
-     composer require diw/photoswipe:^1.0
+     composer require diw/photographer
      ```
 
 2) Database update
-   - Run the Install Tool/Upgrade Wizard or TYPO3 Console to add `fe_users.tx_photoswipe_marks`.
+   - Run the Install Tool/Upgrade Wizard
 
 3) Auto-included configuration
    - New Content Element Wizard entry and TypoScript setup are auto-included; no need to add a static template manually.
@@ -59,12 +63,12 @@ The gallery can be restricted to exactly one frontend user; only this user (when
    - Publish the page so users can log in.
 
 3) Optional: Access testing
-   - Log out, visit a page with the PhotoSwipe element restricted to your test user → the gallery should not render.
+   - Log out, visit a page with the Photographer element restricted to your test user → the gallery should not render.
    - Log in as that FE user, then revisit the page → the gallery renders; mark buttons are visible and usable.
 
 ---
 
-### Using the PhotoSwipe content element
+### Using the Photographer content element
 1) Add the element
    - In the Page module, create a new content element: Media → “PhotoSwipe Gallery”.
    - Use the core “Media” field to select images and set their order.
@@ -102,7 +106,7 @@ The gallery can be restricted to exactly one frontend user; only this user (when
   - If “Restrict to FE user” is set, the current user matches
   - Image belongs to the current gallery (by `sys_file_reference`)
   - Optional “Max selectable” limit
-- The user’s selections are stored as JSON in `fe_users.tx_photoswipe_marks`, keyed by the content element UID. Example structure:
+- The user’s selections are stored as JSON in `fe_users.tx_photographer_marks`, keyed by the content element UID. Example structure:
   ```json
   {
     "123": [11, 35, 47]
@@ -125,9 +129,9 @@ The gallery can be restricted to exactly one frontend user; only this user (when
 
 ### Troubleshooting
 - Gallery not visible while a user is configured in FlexForm: ensure you’re logged in as exactly that FE user.
-- Marking does not persist: verify that `fe_users` table contains the `tx_photoswipe_marks` column and that the FE user record is writable; also check browser devtools for the middleware response.
-- Lightbox doesn’t open: if you use a public storage, ensure your images in `tt_content.media` have valid public URLs (FAL storage properly configured). If you use a private storage, ensure the built-in middleware URL `index.php?photoswipe_file=1&contentUid=...&refUid=...` is reachable and not blocked by rewrites or reverse proxy.
-- Buttons look odd: ensure Bootstrap (or equivalent styling) is available, or adjust `Resources/Public/Css/photoswipe.css`.
+- Marking does not persist: verify that `fe_users` table contains the `tx_photographer_marks` column and that the FE user record is writable; also check browser devtools for the middleware response.
+- Lightbox doesn’t open: if you use a public storage, ensure your images in `tt_content.media` have valid public URLs (FAL storage properly configured). If you use a private storage, ensure the built-in middleware URL `index.php?photographer_file=1&contentUid=...&refUid=...` is reachable and not blocked by rewrites or reverse proxy.
+- Buttons look odd: ensure Bootstrap (or equivalent styling) is available, or adjust `Resources/Public/Css/photographer.css`.
 
 ---
 
@@ -145,7 +149,7 @@ Protected storage outside docroot (not publicly accessible)
 
 How to use the storage in the CE
 - After creating the storage, open the Filelist module and add folders/files under that storage.
-- In your page’s PhotoSwipe content element, pick images via the core “Media” field; you can browse into your new storage as usual.
+- In your page’s Photographer content element, pick images via the core “Media” field; you can browse into your new storage as usual.
 - Ensure that the storage’s Base URL actually works in the browser. If the grid shows broken thumbnails or PhotoSwipe doesn’t open, verify the alias/virtual directory mapping and clear TYPO3 caches.
 
 Tips

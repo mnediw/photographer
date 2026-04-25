@@ -4,5 +4,5 @@ services:
     autoconfigure: true
     public: false
 
-  Diw\Photoswipe\:
+  Diw\Photographer\:
     resource: '../Classes/*'

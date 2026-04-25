@@ -54,7 +54,7 @@ function initGallery(galleryEl) {
     form.set('refUid', String(refUid));
     form.set('action', 'toggle');
     try {
-      const res = await fetch('index.php?photoswipe_mark=1', { method: 'POST', body: form, credentials: 'same-origin' });
+      const res = await fetch('index.php?photographer_mark=1', { method: 'POST', body: form, credentials: 'same-origin' });
       const json = await res.json();
       if (json.success) {
         marked = json.marked || [];

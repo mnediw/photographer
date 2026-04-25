@@ -1,10 +1,10 @@
 <?php
 
-$EM_CONF['photoswipe'] = [
-    'title' => 'DIW PhotoSwipe',
-    'description' => 'PhotoSwipe gallery with per-user marking',
+$EM_CONF['photographer'] = [
+    'title' => 'DIW Photographer',
+    'description' => 'Photographer toolbox with PhotoSwipe gallery (per-user photo marking capability)',
     'category' => 'plugin',
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'state' => 'stable',
     'author' => 'Martin Neumann',
     'author_email' => 'forum@die-internet-werkstatt.de',

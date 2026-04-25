@@ -6,23 +6,23 @@ defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-// Register new content element CType = photoswipe
+// Register new content element CType = photographer
 ExtensionManagementUtility::addTcaSelectItem(
     'tt_content',
     'CType',
     [
-        'LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:plugin.title',
-        'photoswipe',
-        'content-photoswipe',
+        'LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:plugin.title',
+        'photographer',
+        'content-photographer',
     ],
     'textmedia', // place after a common element
     'after'
 );
 
 // Display configuration: use core media field and our FlexForm for options
-$GLOBALS['TCA']['tt_content']['types']['photoswipe'] = [
+$GLOBALS['TCA']['tt_content']['types']['photographer'] = [
     'showitem' => '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,'
-        . ' --palette--;;general,header,media,tx_photoswipe_watermark,pi_flexform,'
+        . ' --palette--;;general,header,media,tx_photographer_watermark,pi_flexform,'
         . ' --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,hidden,starttime,endtime',
     'columnsOverrides' => [
         'media' => [
@@ -47,28 +47,28 @@ $GLOBALS['TCA']['tt_content']['types']['photoswipe'] = [
         'pi_flexform' => [
             'config' => [
                 'ds' => [
-                    'default' => 'FILE:EXT:photoswipe/Configuration/FlexForms/Gallery.xml',
+                    'default' => 'FILE:EXT:photographer/Configuration/FlexForms/Gallery.xml',
                 ],
             ],
         ],
     ],
 ];
 
-// Note: FlexForm DS is assigned above via columnsOverrides for CType "photoswipe".
+// Note: FlexForm DS is assigned above via columnsOverrides for CType "photographer".
 
 // Additionally register DS mapping keyed by CType to ensure BE reliably picks the DS
 // in all contexts (some installations ignore columnsOverrides in certain editors).
 // Format: '*,<CType>' => 'FILE:...'
-$GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,photoswipe'] =
-    'FILE:EXT:photoswipe/Configuration/FlexForms/Gallery.xml';
+$GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,photographer'] =
+    'FILE:EXT:photographer/Configuration/FlexForms/Gallery.xml';
 
 // Add FAL field for optional watermark image (max 1)
-if (!isset($GLOBALS['TCA']['tt_content']['columns']['tx_photoswipe_watermark'])) {
+if (!isset($GLOBALS['TCA']['tt_content']['columns']['tx_photographer_watermark'])) {
     $newCol = [
-        'tx_photoswipe_watermark' => [
+        'tx_photographer_watermark' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:tt_content.tx_photoswipe_watermark',
-            'description' => 'LLL:EXT:photoswipe/Resources/Private/Language/locallang_db.xlf:tt_content.tx_photoswipe_watermark.description',
+            'label' => 'LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:tt_content.tx_photographer_watermark',
+            'description' => 'LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:tt_content.tx_photographer_watermark.description',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'sys_file_reference',
@@ -76,7 +76,7 @@ if (!isset($GLOBALS['TCA']['tt_content']['columns']['tx_photoswipe_watermark']))
                 'foreign_sortby' => 'sorting_foreign',
                 'foreign_match_fields' => [
                     'tablenames' => 'tt_content',
-                    'fieldname' => 'tx_photoswipe_watermark',
+                    'fieldname' => 'tx_photographer_watermark',
                 ],
                 'overrideChildTca' => [
                     'columns' => [
