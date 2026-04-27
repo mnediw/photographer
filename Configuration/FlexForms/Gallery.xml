@@ -116,6 +116,58 @@
             </TCEforms>
           </bgOpacity>
 
+          <!-- Watermark options -->
+          <watermarkPosition>
+            <TCEforms>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.description</description>
+              <config>
+                <type>select</type>
+                <renderType>selectSingle</renderType>
+                <items>
+                  <numIndex index="0"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.tl</numIndex><numIndex index="1">tl</numIndex></numIndex>
+                  <numIndex index="1"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.tr</numIndex><numIndex index="1">tr</numIndex></numIndex>
+                  <numIndex index="2"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.center</numIndex><numIndex index="1">center</numIndex></numIndex>
+                  <numIndex index="3"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.bl</numIndex><numIndex index="1">bl</numIndex></numIndex>
+                  <numIndex index="4"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.br</numIndex><numIndex index="1">br</numIndex></numIndex>
+                </items>
+                <default>br</default>
+              </config>
+            </TCEforms>
+          </watermarkPosition>
+
+          <watermarkOpacity>
+            <TCEforms>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkOpacity</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkOpacity.description</description>
+              <config>
+                <type>input</type>
+                <eval>int</eval>
+                <range>
+                  <lower>0</lower>
+                  <upper>100</upper>
+                </range>
+                <default>50</default>
+              </config>
+            </TCEforms>
+          </watermarkOpacity>
+
+          <watermarkScalePercent>
+            <TCEforms>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkScalePercent</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkScalePercent.description</description>
+              <config>
+                <type>input</type>
+                <eval>int</eval>
+                <range>
+                  <lower>1</lower>
+                  <upper>500</upper>
+                </range>
+                <default>100</default>
+              </config>
+            </TCEforms>
+          </watermarkScalePercent>
+
           <colsMd>
             <TCEforms>
               <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.colsMd</label>

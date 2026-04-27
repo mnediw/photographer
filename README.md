@@ -83,9 +83,14 @@ The gallery can be restricted to exactly one frontend user; only this user (when
 3) Optional watermark (Backend field)
    - You can add a watermark image per content element via the field “Watermark image (optional)”.
    - Recommended format: PNG with transparency. JPEG/WebP are supported too.
-   - When set, the image will be composited onto every delivered gallery image by the file middleware before it is sent to the browser. The watermark is scaled to ~25% of the image width and placed bottom-right with subtle opacity.
+   - When set, the image will be composited onto every delivered gallery image by the file middleware before it is sent to the browser. By default, the watermark is scaled to ~25% of the image width and placed bottom-right with medium opacity.
 
-3) PhotoSwipe options (from FlexForm)
+4) Watermark options (FlexForm)
+   - Position: top-left, top-right, centered, bottom-left, bottom-right (default: bottom-right)
+   - Opacity (%): 0–100 (default: 50)
+   - Size (%): 1–500 (default: 100). Applied relative to the base size (~25% of original image width)
+
+5) PhotoSwipe options (from FlexForm)
    These map directly to PhotoSwipe v5 options (see link below). Defaults are chosen for sensible behavior:
    - initialZoomLevel (float, default 1.0)
    - secondaryZoomLevel (float, default 2.0)
@@ -112,6 +117,25 @@ The gallery can be restricted to exactly one frontend user; only this user (when
     "123": [11, 35, 47]
   }
   ```
+
+---
+
+### PSR‑15 endpoints used by this extension
+- File delivery (supports private storages + watermarking):
+  - GET `/index.php?photographer_file=1&contentUid=UID&refUid=REF_UID`
+  - Returns the requested image (200) or JSON errors (4xx) if access is denied. Public CEs get long‑lived cache headers; restricted CEs are `private, no-store`.
+- Marking API:
+  - POST `/index.php?photographer_mark=1`
+  - Body fields: `contentUid`, `refUid`, `action` (`toggle`|`add`|`remove`)
+  - Response JSON examples:
+    - `{"success": true, "marked": [11,35]}`
+    - `{"success": false, "error": "not_authenticated"}`
+    - `{"success": false, "error": "forbidden"}`
+    - `{"success": false, "error": "limit_reached", "max": 5}`
+
+Notes
+- The extension uses absolute URLs (`/index.php?...`) to avoid issues with `<base href>` or nested paths.
+- The middlewares are registered in `Configuration/RequestMiddlewares.php` and run after FE authentication and before page rendering.
 
 ---
 

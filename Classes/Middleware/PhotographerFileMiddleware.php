@@ -47,7 +47,9 @@ class PhotographerFileMiddleware implements MiddlewareInterface
         }
 
         // Read minimal FlexForm config
-        [$allowedUser] = $this->readAllowedUser((string)$row['pi_flexform']);
+        $xml = (string)$row['pi_flexform'];
+        [$allowedUser] = $this->readAllowedUser($xml);
+        [$wmPosition, $wmOpacityPct, $wmScalePct] = $this->readWatermarkOptions($xml);
 
         // Optional: find watermark file for this CE (first active reference)
         $watermarkPath = null;
@@ -121,7 +123,10 @@ class PhotographerFileMiddleware implements MiddlewareInterface
                     $mime,
                     $mtime,
                     $watermarkPath,
-                    (int)@filemtime($watermarkPath)
+                    (int)@filemtime($watermarkPath),
+                    $wmPosition,
+                    $wmOpacityPct,
+                    $wmScalePct
                 );
             }
 
@@ -204,6 +209,42 @@ class PhotographerFileMiddleware implements MiddlewareInterface
         return [$allowedUser];
     }
 
+    /**
+     * Reads watermark options from FlexForm XML.
+     * Returns array [position, opacityPercent (0-100), scalePercent (1-500)]
+     */
+    private function readWatermarkOptions(string $xml): array
+    {
+        $position = 'br';
+        $opacity = 50;
+        $scale = 100;
+        if ($xml === '') {
+            return [$position, $opacity, $scale];
+        }
+        try {
+            $dom = new \DOMDocument();
+            $dom->loadXML($xml);
+            foreach ($dom->getElementsByTagName('field') as $field) {
+                $idx = $field->getAttribute('index');
+                $val = $field->getElementsByTagName('value')->item(0)?->textContent ?? '';
+                switch ($idx) {
+                    case 'watermarkPosition':
+                        $map = ['tl','tr','center','bl','br'];
+                        $position = in_array($val, $map, true) ? $val : $position;
+                        break;
+                    case 'watermarkOpacity':
+                        $n = (int)$val; if ($n < 0) $n = 0; if ($n > 100) $n = 100; $opacity = $n;
+                        break;
+                    case 'watermarkScalePercent':
+                        $n = (int)$val; if ($n < 1) $n = 1; if ($n > 500) $n = 500; $scale = $n;
+                        break;
+                }
+            }
+        } catch (\Throwable) {
+        }
+        return [$position, $opacity, $scale];
+    }
+
     private function resolveFrontendUserUid(ServerRequestInterface $request): int
     {
         $feUser = $request->getAttribute('frontend.user');
@@ -224,10 +265,10 @@ class PhotographerFileMiddleware implements MiddlewareInterface
         return 0;
     }
 
-    private function buildWatermarkedImage(string $srcPath, string $srcMime, int $srcMTime, string $wmPath, int $wmMTime): array
+    private function buildWatermarkedImage(string $srcPath, string $srcMime, int $srcMTime, string $wmPath, int $wmMTime, string $position, int $opacityPct, int $scalePct): array
     {
         // Cache file path based on source+watermark mtimes and names
-        $hash = sha1($srcPath . '|' . $srcMTime . '|' . $wmPath . '|' . $wmMTime);
+        $hash = sha1($srcPath . '|' . $srcMTime . '|' . $wmPath . '|' . $wmMTime . '|' . $position . '|' . $opacityPct . '|' . $scalePct);
         $ext = $this->preferedExtensionForMime($srcMime);
         $cacheDir = Environment::getPublicPath() . '/typo3temp/assets/photographer';
         try { GeneralUtility::mkdir_deep($cacheDir); } catch (\Throwable) {}
@@ -242,13 +283,23 @@ class PhotographerFileMiddleware implements MiddlewareInterface
             if (class_exists(\Imagick::class)) {
                 $img = new \Imagick($srcPath);
                 $wm = new \Imagick($wmPath);
-                // Scale watermark to ~25% of image width
-                $targetW = max(1, (int)round($img->getImageWidth() * 0.25));
+                // Base: ~25% of image width, scaled by user percent
+                $base = 0.25 * max(1, $scalePct) / 100.0;
+                $targetW = max(1, (int)round($img->getImageWidth() * $base));
                 $wm->resizeImage($targetW, 0, \Imagick::FILTER_LANCZOS, 1, true);
-                $wm->setImageOpacity(0.35); // subtle watermark
-                // Place bottom-right with margin 16px
-                $x = max(0, $img->getImageWidth() - $wm->getImageWidth() - 16);
-                $y = max(0, $img->getImageHeight() - $wm->getImageHeight() - 16);
+                $wm->setImageOpacity(max(0.0, min(1.0, $opacityPct / 100.0)));
+                // Place by position with margin 16px
+                $margin = 16;
+                $imgW = $img->getImageWidth(); $imgH = $img->getImageHeight();
+                $wmW = $wm->getImageWidth(); $wmH = $wm->getImageHeight();
+                switch ($position) {
+                    case 'tl': $x = $margin; $y = $margin; break;
+                    case 'tr': $x = max(0, $imgW - $wmW - $margin); $y = $margin; break;
+                    case 'center': $x = max(0, (int)floor(($imgW - $wmW) / 2)); $y = max(0, (int)floor(($imgH - $wmH) / 2)); break;
+                    case 'bl': $x = $margin; $y = max(0, $imgH - $wmH - $margin); break;
+                    case 'br':
+                    default: $x = max(0, $imgW - $wmW - $margin); $y = max(0, $imgH - $wmH - $margin); break;
+                }
                 $img->compositeImage($wm, \Imagick::COMPOSITE_OVER, $x, $y);
                 $img->setImageCompressionQuality(90);
                 $img->writeImage($cacheFile);
@@ -266,15 +317,24 @@ class PhotographerFileMiddleware implements MiddlewareInterface
             if ($src && $wmImg) {
                 $srcW = imagesx($src); $srcH = imagesy($src);
                 $wmW = imagesx($wmImg); $wmH = imagesy($wmImg);
-                $scale = max(1, (int)round($srcW * 0.25));
-                $newW = $scale; $newH = (int)round($wmH * ($newW / $wmW));
+                $base = 0.25 * max(1, $scalePct) / 100.0;
+                $newW = max(1, (int)round($srcW * $base));
+                $newH = (int)round($wmH * ($newW / $wmW));
                 $wmResized = imagecreatetruecolor($newW, $newH);
                 imagealphablending($wmResized, false); imagesavealpha($wmResized, true);
                 imagecopyresampled($wmResized, $wmImg, 0, 0, 0, 0, $newW, $newH, $wmW, $wmH);
-                // Merge bottom-right with 35% opacity
-                $x = max(0, $srcW - $newW - 16); $y = max(0, $srcH - $newH - 16);
+                // Position with margin
+                $margin = 16;
+                switch ($position) {
+                    case 'tl': $x = $margin; $y = $margin; break;
+                    case 'tr': $x = max(0, $srcW - $newW - $margin); $y = $margin; break;
+                    case 'center': $x = max(0, (int)floor(($srcW - $newW) / 2)); $y = max(0, (int)floor(($srcH - $newH) / 2)); break;
+                    case 'bl': $x = $margin; $y = max(0, $srcH - $newH - $margin); break;
+                    case 'br':
+                    default: $x = max(0, $srcW - $newW - $margin); $y = max(0, $srcH - $newH - $margin); break;
+                }
                 imagealphablending($src, true);
-                $this->imagecopymergeAlpha($src, $wmResized, $x, $y, 0, 0, $newW, $newH, 35);
+                $this->imagecopymergeAlpha($src, $wmResized, $x, $y, 0, 0, $newW, $newH, max(0, min(100, $opacityPct)));
                 $this->gdSave($src, $cacheFile, $ext);
                 imagedestroy($wmResized); imagedestroy($wmImg); imagedestroy($src);
                 $mime = $this->mimeFromExtension($ext);

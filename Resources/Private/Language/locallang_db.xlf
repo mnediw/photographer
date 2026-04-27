@@ -27,6 +27,21 @@
       <trans-unit id="tab.photographer"><source>Photographer</source></trans-unit>
       <trans-unit id="tt_content.tx_photographer_watermark"><source>Watermark image (optional)</source></trans-unit>
       <trans-unit id="tt_content.tx_photographer_watermark.description"><source>If set, the selected image will be composited as a watermark onto all delivered gallery images at runtime. Use a PNG with transparency for best results.</source></trans-unit>
+      
+      <!-- Watermark FlexForm options -->
+      <trans-unit id="flexform.watermarkPosition"><source>Watermark position</source></trans-unit>
+      <trans-unit id="flexform.watermarkPosition.description"><source>Where to place the watermark on the delivered image.</source></trans-unit>
+      <trans-unit id="flexform.watermarkPosition.tl"><source>Top left</source></trans-unit>
+      <trans-unit id="flexform.watermarkPosition.tr"><source>Top right</source></trans-unit>
+      <trans-unit id="flexform.watermarkPosition.center"><source>Centered</source></trans-unit>
+      <trans-unit id="flexform.watermarkPosition.bl"><source>Bottom left</source></trans-unit>
+      <trans-unit id="flexform.watermarkPosition.br"><source>Bottom right</source></trans-unit>
+
+      <trans-unit id="flexform.watermarkOpacity"><source>Watermark opacity (%)</source></trans-unit>
+      <trans-unit id="flexform.watermarkOpacity.description"><source>Transparency of the watermark from 0 (fully transparent) to 100 (fully opaque). Default: 50.</source></trans-unit>
+
+      <trans-unit id="flexform.watermarkScalePercent"><source>Watermark size (%)</source></trans-unit>
+      <trans-unit id="flexform.watermarkScalePercent.description"><source>Scales the watermark relative to the default size. 100% keeps the default size; lower/greater values shrink/enlarge it.</source></trans-unit>
     </body>
   </file>
   </xliff>
