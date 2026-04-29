@@ -81,6 +81,8 @@ class PhotographerProcessor implements DataProcessorInterface, LoggerAwareInterf
         $bgOpacity = 0.8;
         $colsMd = 3;
         $colsLg = 3;
+        $listMaxWidth = 1024; // px, 0 = no resize
+        $lightboxMaxWidth = 2048; // px, 0 = no resize
         $ffXml = (string)($data['pi_flexform'] ?? '');
         if ($ffXml !== '') {
             // First try: FlexFormService (works in most cases)
@@ -161,6 +163,21 @@ class PhotographerProcessor implements DataProcessorInterface, LoggerAwareInterf
                     $colsLgVal = is_array($first) ? (array_values($first)[0] ?? 3) : $first;
                 }
                 $colsLg = max(1, min(12, (int)$colsLgVal));
+
+                // Image sizing
+                $lmwVal = $arr['listMaxWidth'] ?? $listMaxWidth;
+                if (is_array($lmwVal)) {
+                    $first = array_values($lmwVal)[0] ?? $listMaxWidth;
+                    $lmwVal = is_array($first) ? (array_values($first)[0] ?? $listMaxWidth) : $first;
+                }
+                $listMaxWidth = max(0, min(10000, (int)$lmwVal));
+
+                $lbmwVal = $arr['lightboxMaxWidth'] ?? $lightboxMaxWidth;
+                if (is_array($lbmwVal)) {
+                    $first = array_values($lbmwVal)[0] ?? $lightboxMaxWidth;
+                    $lbmwVal = is_array($first) ? (array_values($first)[0] ?? $lightboxMaxWidth) : $first;
+                }
+                $lightboxMaxWidth = max(0, min(10000, (int)$lbmwVal));
             } catch (\Throwable) {
             }
 
@@ -192,6 +209,10 @@ class PhotographerProcessor implements DataProcessorInterface, LoggerAwareInterf
                             $colsMd = max(1, min(12, (int)$vdef));
                         } elseif ($index === 'colsLg') {
                             $colsLg = max(1, min(12, (int)$vdef));
+                        } elseif ($index === 'listMaxWidth') {
+                            $listMaxWidth = max(0, min(10000, (int)$vdef));
+                        } elseif ($index === 'lightboxMaxWidth') {
+                            $lightboxMaxWidth = max(0, min(10000, (int)$vdef));
                         }
                     }
                 } catch (\Throwable) {
@@ -234,10 +255,36 @@ class PhotographerProcessor implements DataProcessorInterface, LoggerAwareInterf
         $processedData['bgOpacity'] = $bgOpacity;
         $processedData['colsMd'] = $colsMd;
         $processedData['colsLg'] = $colsLg;
+        $processedData['listMaxWidth'] = $listMaxWidth;
+        $processedData['lightboxMaxWidth'] = $lightboxMaxWidth;
         $processedData['hasAccess'] = $hasAccess;
         $processedData['isLoggedInUser'] = $feUserUid;
         $processedData['contentUid'] = $contentUid;
         $processedData['markedRefUids'] = $markedRefUids;
+
+        // Compute scaled dimensions for thumbnails and lightbox (used by template / PhotoSwipe)
+        foreach ($images as $k => $img) {
+            $ow = (int)($img['width'] ?? 0);
+            $oh = (int)($img['height'] ?? 0);
+            if ($ow > 0 && $oh > 0) {
+                // Thumb/list
+                $tw = $listMaxWidth > 0 ? min($ow, $listMaxWidth) : $ow;
+                $th = (int)round($oh * ($tw / $ow));
+                // Lightbox
+                $lw = $lightboxMaxWidth > 0 ? min($ow, $lightboxMaxWidth) : $ow;
+                $lh = (int)round($oh * ($lw / $ow));
+                $images[$k]['thumbWidth'] = $tw;
+                $images[$k]['thumbHeight'] = $th;
+                $images[$k]['lbWidth'] = $lw;
+                $images[$k]['lbHeight'] = $lh;
+            } else {
+                $images[$k]['thumbWidth'] = $img['width'] ?? 0;
+                $images[$k]['thumbHeight'] = $img['height'] ?? 0;
+                $images[$k]['lbWidth'] = $img['width'] ?? 0;
+                $images[$k]['lbHeight'] = $img['height'] ?? 0;
+            }
+        }
+        $processedData['images'] = $images;
 
         return $processedData;
     }

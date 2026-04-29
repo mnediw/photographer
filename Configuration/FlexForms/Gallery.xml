@@ -116,6 +116,31 @@
             </TCEforms>
           </bgOpacity>
 
+          <!-- Image sizing options -->
+          <listMaxWidth>
+            <TCEforms>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.listMaxWidth</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.listMaxWidth.description</description>
+              <config>
+                <type>input</type>
+                <eval>int</eval>
+                <default>1024</default>
+              </config>
+            </TCEforms>
+          </listMaxWidth>
+
+          <lightboxMaxWidth>
+            <TCEforms>
+              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.lightboxMaxWidth</label>
+              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.lightboxMaxWidth.description</description>
+              <config>
+                <type>input</type>
+                <eval>int</eval>
+                <default>2048</default>
+              </config>
+            </TCEforms>
+          </lightboxMaxWidth>
+
           <!-- Watermark options -->
           <watermarkPosition>
             <TCEforms>

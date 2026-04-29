@@ -21,6 +21,12 @@
       <trans-unit id="flexform.showHideAnimationType.description"><source>Animation used when opening/closing the lightbox. Options: zoom, fade, none.</source></trans-unit>
       <trans-unit id="flexform.bgOpacity"><source>Background opacity</source></trans-unit>
       <trans-unit id="flexform.bgOpacity.description"><source>Opacity of the lightbox backdrop. 0 = transparent, 1 = opaque.</source></trans-unit>
+      
+      <!-- Image sizing options -->
+      <trans-unit id="flexform.listMaxWidth"><source>Max image width in list/grid (px)</source></trans-unit>
+      <trans-unit id="flexform.listMaxWidth.description"><source>Limits the delivered image width for thumbnails in the page grid. The image is resized server-side by the middleware. 0 disables resizing.</source></trans-unit>
+      <trans-unit id="flexform.lightboxMaxWidth"><source>Max image width in lightbox (px)</source></trans-unit>
+      <trans-unit id="flexform.lightboxMaxWidth.description"><source>Limits the delivered image width when opened in the PhotoSwipe lightbox. The image is resized server-side by the middleware. 0 disables resizing.</source></trans-unit>
       <trans-unit id="flexform.colsMd"><source>Columns on medium screens (md)</source></trans-unit>
       <trans-unit id="flexform.colsLg"><source>Columns on large screens (lg)</source></trans-unit>
       <trans-unit id="fe_users.tx_photographer_marks"><source>Photographer Marks (JSON)</source></trans-unit>

@@ -13,13 +13,15 @@
              data-bg-opacity="{bgOpacity}">
             <f:for each="{images}" as="image">
                 <div class="col">
-                    <a href="/index.php?photographer_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}"
-                       data-pswp-width="{image.width}"
-                       data-pswp-height="{image.height}"
+                    <a href="/index.php?photographer_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}&amp;maxW={lightboxMaxWidth}"
+                       data-pswp-width="{image.lbWidth}"
+                       data-pswp-height="{image.lbHeight}"
                        data-pswp-title="{image.title}"
                        data-refuid="{image.refUid}"
                        class="d-block position-relative border rounded overflow-hidden">
-                        <img src="/index.php?photographer_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}" alt="{image.title}" class="img-fluid w-100" loading="lazy" />
+                        <img src="/index.php?photographer_file=1&amp;contentUid={contentUid}&amp;refUid={image.refUid}&amp;maxW={listMaxWidth}"
+                             alt="{image.title}" class="img-fluid w-100" loading="lazy"
+                             width="{image.thumbWidth}" height="{image.thumbHeight}" />
                         <f:if condition="{hasAccess}">
                             <button type="button"
                                     class="btn btn-sm btn-primary position-absolute top-0 end-0 m-2 js-pswp-mark"
