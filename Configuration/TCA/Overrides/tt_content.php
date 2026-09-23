@@ -44,11 +44,11 @@ $GLOBALS['TCA']['tt_content']['types']['photographer'] = [
             ],
         ],
         // Bind our FlexForm data structure to this CType
+        // Note: TYPO3 v14 requires 'ds' in columnsOverrides to be a plain string (not the legacy
+        // array keyed by "default"/"CType,list_type") - see FlexFormFieldType::getDataStructure().
         'pi_flexform' => [
             'config' => [
-                'ds' => [
-                    'default' => 'FILE:EXT:photographer/Configuration/FlexForms/Gallery.xml',
-                ],
+                'ds' => 'FILE:EXT:photographer/Configuration/FlexForms/Gallery.xml',
             ],
         ],
     ],
@@ -59,8 +59,13 @@ $GLOBALS['TCA']['tt_content']['types']['photographer'] = [
 // Additionally register DS mapping keyed by CType to ensure BE reliably picks the DS
 // in all contexts (some installations ignore columnsOverrides in certain editors).
 // Format: '*,<CType>' => 'FILE:...'
-$GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,photographer'] =
-    'FILE:EXT:photographer/Configuration/FlexForms/Gallery.xml';
+// Only applies where the base column config still uses the legacy array-based "ds"
+// (TYPO3 v14's core tt_content TCA defines pi_flexform.config.ds as a plain XML string,
+// so indexing into it here would be a fatal error).
+if (is_array($GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds'] ?? null)) {
+    $GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,photographer'] =
+        'FILE:EXT:photographer/Configuration/FlexForms/Gallery.xml';
+}
 
 // Add FAL field for optional watermark image (max 1)
 if (!isset($GLOBALS['TCA']['tt_content']['columns']['tx_photographer_watermark'])) {
