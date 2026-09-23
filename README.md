@@ -1,4 +1,4 @@
-### DIW Photographerfor TYPO3 (v12–v13)
+### DIW Photographerfor TYPO3 (v12–v14)
 
 PhotoSwipe gallery content element for TYPO3 that lets a specific frontend user mark/select images - especially helpful for photographers to let their customers mark the photos they want to purchase. Adds a lightbox with PhotoSwipe v5. Images can be served from public or private FAL storages; for private storages the extension ships a PSR-15 middleware that delivers files with access control.
 
@@ -20,8 +20,8 @@ PhotoSwipe gallery content element for TYPO3 that lets a specific frontend user 
 ---
 
 ### Requirements
-- TYPO3 12.4 LTS or 13.x
-- PHP 8.1+
+- TYPO3 12.4 LTS, 13.x or 14.x
+- PHP 8.2+
 - Recommended: Bootstrap Package by bk2k (for default button/grid styling)
 
 Composer suggest:

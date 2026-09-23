@@ -3,7 +3,7 @@ tt_content.photographer {
   templateName = Photographer
   templateRootPaths.10 = EXT:photographer/Resources/Private/Templates/Content/
   partialRootPaths.10 = EXT:photographer/Resources/Private/Partials/
-  layoutRootPaths.10 = EXT:photosgrapher/Resources/Private/Layouts/
+  layoutRootPaths.10 = EXT:photographer/Resources/Private/Layouts/
 
   dataProcessing {
     10 = Diw\Photographer\DataProcessing\PhotographerProcessor
