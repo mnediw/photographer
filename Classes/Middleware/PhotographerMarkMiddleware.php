@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Diw\Photographer\Middleware;
 
-use Doctrine\DBAL\Connection;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -171,7 +171,7 @@ class PhotographerMarkMiddleware implements MiddlewareInterface
                 ->where(
                     $qb->expr()->eq('tablenames', $qb->createNamedParameter('tt_content')),
                     $qb->expr()->eq('fieldname', $qb->createNamedParameter('media')),
-                    $qb->expr()->eq('uid_foreign', $qb->createNamedParameter($contentUid, \PDO::PARAM_INT)),
+                    $qb->expr()->eq('uid_foreign', $qb->createNamedParameter($contentUid, Connection::PARAM_INT)),
                     $qb->expr()->eq('deleted', 0),
                     $qb->expr()->eq('hidden', 0)
                 )
@@ -189,18 +189,6 @@ class PhotographerMarkMiddleware implements MiddlewareInterface
         $feUser = $request->getAttribute('frontend.user');
         if ($feUser instanceof FrontendUserAuthentication && !empty($feUser->user['uid'])) {
             return (int)$feUser->user['uid'];
-        }
-        // Fallback for exotic contexts
-        try {
-            /** @var FrontendUserAuthentication $alt */
-            $alt = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
-            $alt->checkPid = 0;
-            $alt->start();
-            $alt->checkAuthentication();
-            if (!empty($alt->user['uid'])) {
-                return (int)$alt->user['uid'];
-            }
-        } catch (\Throwable) {
         }
         return 0;
     }

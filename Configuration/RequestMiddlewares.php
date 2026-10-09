@@ -10,7 +10,7 @@ return [
                 'typo3/cms-frontend/authentication',
             ],
             'before' => [
-                'typo3/cms-frontend/tsfe',
+                'typo3/cms-frontend/prepare-tsfe-rendering',
             ],
         ],
         'diw/photographer/mark' => [
@@ -21,7 +21,7 @@ return [
             ],
             // Run before TSFE builds the page; we short-circuit with a JSON response
             'before' => [
-                'typo3/cms-frontend/tsfe',
+                'typo3/cms-frontend/prepare-tsfe-rendering',
             ],
         ],
     ],
