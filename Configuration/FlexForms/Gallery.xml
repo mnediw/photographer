@@ -3,232 +3,182 @@
   <sheets>
     <sDEF>
       <ROOT>
-        <TCEforms>
-          <sheetTitle>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.sheet.general</sheetTitle>
-        </TCEforms>
+        <sheetTitle>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.sheet.general</sheetTitle>
         <type>array</type>
         <el>
           <allowedUser>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.allowedUser</label>
-              <config>
-                <type>select</type>
-                <renderType>selectSingle</renderType>
-                <foreign_table>fe_users</foreign_table>
-                <items>
-                  <numIndex index="0">
-                    <numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.allowedUser.none</numIndex>
-                    <numIndex index="1">0</numIndex>
-                  </numIndex>
-                </items>
-                <minitems>0</minitems>
-                <maxitems>1</maxitems>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.allowedUser</label>
+            <config>
+              <type>select</type>
+              <renderType>selectSingle</renderType>
+              <foreign_table>fe_users</foreign_table>
+              <items>
+                <numIndex index="0">
+                  <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.allowedUser.none</label>
+                  <value>0</value>
+                </numIndex>
+              </items>
+              <minitems>0</minitems>
+              <maxitems>1</maxitems>
+            </config>
           </allowedUser>
 
           <maxSelectable>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxSelectable</label>
-              <displayCond>FIELD:allowedUser:REQ:true</displayCond>
-              <config>
-                <type>input</type>
-                <eval>int</eval>
-                <default>0</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxSelectable</label>
+            <displayCond>FIELD:allowedUser:REQ:true</displayCond>
+            <config>
+              <type>number</type>
+              <default>0</default>
+            </config>
           </maxSelectable>
-
           <!-- PhotoSwipe options (v5) moved from JSON to explicit fields -->
           <initialZoomLevel>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.initialZoomLevel</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.initialZoomLevel.description</description>
-              <config>
-                <type>input</type>
-                <eval>double2</eval>
-                <default>1</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.initialZoomLevel</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.initialZoomLevel.description</description>
+            <config>
+              <type>number</type>
+              <format>decimal</format>
+              <default>1</default>
+            </config>
           </initialZoomLevel>
-
           <secondaryZoomLevel>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.secondaryZoomLevel</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.secondaryZoomLevel.description</description>
-              <config>
-                <type>input</type>
-                <eval>double2</eval>
-                <default>2</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.secondaryZoomLevel</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.secondaryZoomLevel.description</description>
+            <config>
+              <type>number</type>
+              <format>decimal</format>
+              <default>2</default>
+            </config>
           </secondaryZoomLevel>
-
           <maxZoomLevel>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxZoomLevel</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxZoomLevel.description</description>
-              <config>
-                <type>input</type>
-                <eval>double2</eval>
-                <default>4</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxZoomLevel</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.maxZoomLevel.description</description>
+            <config>
+              <type>number</type>
+              <format>decimal</format>
+              <default>4</default>
+            </config>
           </maxZoomLevel>
-
           <mouseMovePan>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.mouseMovePan</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.mouseMovePan.description</description>
-              <config>
-                <type>check</type>
-                <default>1</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.mouseMovePan</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.mouseMovePan.description</description>
+            <config>
+              <type>check</type>
+              <default>1</default>
+            </config>
           </mouseMovePan>
-
           <showHideAnimationType>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.showHideAnimationType</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.showHideAnimationType.description</description>
-              <config>
-                <type>select</type>
-                <renderType>selectSingle</renderType>
-                <items>
-                  <numIndex index="0"><numIndex index="0">zoom</numIndex><numIndex index="1">zoom</numIndex></numIndex>
-                  <numIndex index="1"><numIndex index="0">fade</numIndex><numIndex index="1">fade</numIndex></numIndex>
-                  <numIndex index="2"><numIndex index="0">none</numIndex><numIndex index="1">none</numIndex></numIndex>
-                </items>
-                <default>zoom</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.showHideAnimationType</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.showHideAnimationType.description</description>
+            <config>
+              <type>select</type>
+              <renderType>selectSingle</renderType>
+              <items>
+                <numIndex index="0"><label>zoom</label><value>zoom</value></numIndex>
+                <numIndex index="1"><label>fade</label><value>fade</value></numIndex>
+                <numIndex index="2"><label>none</label><value>none</value></numIndex>
+              </items>
+              <default>zoom</default>
+            </config>
           </showHideAnimationType>
-
           <bgOpacity>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.bgOpacity</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.bgOpacity.description</description>
-              <config>
-                <type>input</type>
-                <eval>double2</eval>
-                <default>0.8</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.bgOpacity</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.bgOpacity.description</description>
+            <config>
+              <type>number</type>
+              <format>decimal</format>
+              <default>0.8</default>
+            </config>
           </bgOpacity>
-
           <!-- Image sizing options -->
           <listMaxWidth>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.listMaxWidth</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.listMaxWidth.description</description>
-              <config>
-                <type>input</type>
-                <eval>int</eval>
-                <default>1024</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.listMaxWidth</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.listMaxWidth.description</description>
+            <config>
+              <type>number</type>
+              <default>1024</default>
+            </config>
           </listMaxWidth>
-
           <lightboxMaxWidth>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.lightboxMaxWidth</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.lightboxMaxWidth.description</description>
-              <config>
-                <type>input</type>
-                <eval>int</eval>
-                <default>2048</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.lightboxMaxWidth</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.lightboxMaxWidth.description</description>
+            <config>
+              <type>number</type>
+              <default>2048</default>
+            </config>
           </lightboxMaxWidth>
-
           <!-- Watermark options -->
           <watermarkPosition>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.description</description>
-              <config>
-                <type>select</type>
-                <renderType>selectSingle</renderType>
-                <items>
-                  <numIndex index="0"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.tl</numIndex><numIndex index="1">tl</numIndex></numIndex>
-                  <numIndex index="1"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.tr</numIndex><numIndex index="1">tr</numIndex></numIndex>
-                  <numIndex index="2"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.center</numIndex><numIndex index="1">center</numIndex></numIndex>
-                  <numIndex index="3"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.bl</numIndex><numIndex index="1">bl</numIndex></numIndex>
-                  <numIndex index="4"><numIndex index="0">LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.br</numIndex><numIndex index="1">br</numIndex></numIndex>
-                </items>
-                <default>br</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.description</description>
+            <config>
+              <type>select</type>
+              <renderType>selectSingle</renderType>
+              <items>
+                <numIndex index="0"><label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.tl</label><value>tl</value></numIndex>
+                <numIndex index="1"><label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.tr</label><value>tr</value></numIndex>
+                <numIndex index="2"><label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.center</label><value>center</value></numIndex>
+                <numIndex index="3"><label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.bl</label><value>bl</value></numIndex>
+                <numIndex index="4"><label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkPosition.br</label><value>br</value></numIndex>
+              </items>
+              <default>br</default>
+            </config>
           </watermarkPosition>
-
           <watermarkOpacity>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkOpacity</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkOpacity.description</description>
-              <config>
-                <type>input</type>
-                <eval>int</eval>
-                <range>
-                  <lower>0</lower>
-                  <upper>100</upper>
-                </range>
-                <default>50</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkOpacity</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkOpacity.description</description>
+            <config>
+              <type>number</type>
+              <range>
+                <lower>0</lower>
+                <upper>100</upper>
+              </range>
+              <default>50</default>
+            </config>
           </watermarkOpacity>
-
           <watermarkScalePercent>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkScalePercent</label>
-              <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkScalePercent.description</description>
-              <config>
-                <type>input</type>
-                <eval>int</eval>
-                <range>
-                  <lower>1</lower>
-                  <upper>500</upper>
-                </range>
-                <default>100</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkScalePercent</label>
+            <description>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.watermarkScalePercent.description</description>
+            <config>
+              <type>number</type>
+              <range>
+                <lower>1</lower>
+                <upper>500</upper>
+              </range>
+              <default>100</default>
+            </config>
           </watermarkScalePercent>
-
           <colsMd>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.colsMd</label>
-              <config>
-                <type>select</type>
-                <renderType>selectSingle</renderType>
-                <items>
-                  <numIndex index="0"><numIndex index="0">1</numIndex><numIndex index="1">1</numIndex></numIndex>
-                  <numIndex index="1"><numIndex index="0">2</numIndex><numIndex index="1">2</numIndex></numIndex>
-                  <numIndex index="2"><numIndex index="0">3</numIndex><numIndex index="1">3</numIndex></numIndex>
-                  <numIndex index="3"><numIndex index="0">4</numIndex><numIndex index="1">4</numIndex></numIndex>
-                  <numIndex index="5"><numIndex index="0">6</numIndex><numIndex index="1">6</numIndex></numIndex>
-                  <numIndex index="11"><numIndex index="0">12</numIndex><numIndex index="1">12</numIndex></numIndex>
-                </items>
-                <default>3</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.colsMd</label>
+            <config>
+              <type>select</type>
+              <renderType>selectSingle</renderType>
+              <items>
+                <numIndex index="0"><label>1</label><value>1</value></numIndex>
+                <numIndex index="1"><label>2</label><value>2</value></numIndex>
+                <numIndex index="2"><label>3</label><value>3</value></numIndex>
+                <numIndex index="3"><label>4</label><value>4</value></numIndex>
+                <numIndex index="5"><label>6</label><value>6</value></numIndex>
+                <numIndex index="11"><label>12</label><value>12</value></numIndex>
+              </items>
+              <default>3</default>
+            </config>
           </colsMd>
-
           <colsLg>
-            <TCEforms>
-              <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.colsLg</label>
-              <config>
-                <type>select</type>
-                <renderType>selectSingle</renderType>
-                <items>
-                  <numIndex index="0"><numIndex index="0">1</numIndex><numIndex index="1">1</numIndex></numIndex>
-                  <numIndex index="1"><numIndex index="0">2</numIndex><numIndex index="1">2</numIndex></numIndex>
-                  <numIndex index="2"><numIndex index="0">3</numIndex><numIndex index="1">3</numIndex></numIndex>
-                  <numIndex index="3"><numIndex index="0">4</numIndex><numIndex index="1">4</numIndex></numIndex>
-                  <numIndex index="5"><numIndex index="0">6</numIndex><numIndex index="1">6</numIndex></numIndex>
-                  <numIndex index="11"><numIndex index="0">12</numIndex><numIndex index="1">12</numIndex></numIndex>
-                </items>
-                <default>3</default>
-              </config>
-            </TCEforms>
+            <label>LLL:EXT:photographer/Resources/Private/Language/locallang_db.xlf:flexform.colsLg</label>
+            <config>
+              <type>select</type>
+              <renderType>selectSingle</renderType>
+              <items>
+                <numIndex index="0"><label>1</label><value>1</value></numIndex>
+                <numIndex index="1"><label>2</label><value>2</value></numIndex>
+                <numIndex index="2"><label>3</label><value>3</value></numIndex>
+                <numIndex index="3"><label>4</label><value>4</value></numIndex>
+                <numIndex index="5"><label>6</label><value>6</value></numIndex>
+                <numIndex index="11"><label>12</label><value>12</value></numIndex>
+              </items>
+              <default>3</default>
+            </config>
           </colsLg>
         </el>
       </ROOT>
