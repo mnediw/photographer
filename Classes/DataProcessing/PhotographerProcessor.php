@@ -7,6 +7,7 @@ namespace Diw\Photographer\DataProcessing;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -37,7 +38,7 @@ class PhotographerProcessor implements DataProcessorInterface, LoggerAwareInterf
                 ->where(
                     $qb->expr()->eq('tablenames', $qb->createNamedParameter('tt_content')),
                     $qb->expr()->eq('fieldname', $qb->createNamedParameter('media')),
-                    $qb->expr()->eq('uid_foreign', $qb->createNamedParameter($contentUid, \PDO::PARAM_INT)),
+                    $qb->expr()->eq('uid_foreign', $qb->createNamedParameter($contentUid, Connection::PARAM_INT)),
                     $qb->expr()->eq('deleted', 0),
                     $qb->expr()->eq('hidden', 0)
                 )
@@ -127,6 +128,13 @@ class PhotographerProcessor implements DataProcessorInterface, LoggerAwareInterf
         $context = GeneralUtility::makeInstance(Context::class);
         $feUserUid = (int)$context->getPropertyFromAspect('frontend.user', 'id', 0);
         $hasAccess = $allowedUser === 0 || ($feUserUid > 0 && $allowedUser === $feUserUid);
+
+        // The page cache is only varied by user groups, not by individual users. A gallery restricted
+        // to a single user (and its per-user mark state) must therefore never end up in the page cache,
+        // otherwise users sharing a group would see each other's (empty or forbidden) rendering.
+        if ($allowedUser > 0) {
+            $cObj->getRequest()->getAttribute('frontend.cache.instruction')?->disableCache('EXT:photographer: per-user gallery');
+        }
 
         $markedRefUids = [];
         if ($feUserUid > 0 && $hasAccess) {

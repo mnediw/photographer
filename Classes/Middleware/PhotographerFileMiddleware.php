@@ -275,17 +275,6 @@ class PhotographerFileMiddleware implements MiddlewareInterface
         if ($feUser instanceof FrontendUserAuthentication && !empty($feUser->user['uid'])) {
             return (int)$feUser->user['uid'];
         }
-        try {
-            /** @var FrontendUserAuthentication $alt */
-            $alt = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
-            $alt->checkPid = 0;
-            $alt->start();
-            $alt->checkAuthentication();
-            if (!empty($alt->user['uid'])) {
-                return (int)$alt->user['uid'];
-            }
-        } catch (\Throwable) {
-        }
         return 0;
     }
 
